@@ -1,9 +1,20 @@
-/* add css module styles here (optional) */
+.hidden {
+    opacity: 0;
+    filter: blur(4px);
+    translate: 0 12px;
+    transition: all;
+    transition-duration: 1000ms;
+    transition-timing-function: ease-in-out;
+}
 
-.test {
-  margin: 2em;
-  padding: 0.5em;
-  border: 2px solid #000;
-  font-size: 2em;
-  text-align: center;
+.show {
+    opacity: 1;
+    filter: blur(0px);
+    translate: none;
+}
+
+@media (prefers-reduced-motion) {
+    .hidden {
+        transition: none;
+    }
 }
