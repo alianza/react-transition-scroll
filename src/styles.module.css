@@ -1,20 +1,11 @@
-.hidden {
-    opacity: 0;
-    filter: blur(4px);
-    translate: 0 12px;
+.baseStyle {
     transition: all;
     transition-duration: 1000ms;
     transition-timing-function: ease-in-out;
 }
 
-.show {
-    opacity: 1;
-    filter: blur(0px);
-    translate: none;
-}
-
 @media (prefers-reduced-motion) {
-    .hidden {
+    .baseStyle {
         transition: none;
     }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import * as PropTypes from 'prop-types'
 
@@ -7,25 +7,46 @@ export const TransitionScroll = ({
   reAnimate = false,
   children,
   callBack = () => {},
+  baseStyle = {},
+  hiddenStyle = {
+    opacity: 1,
+    translate: '0 12px',
+    filter: 'blur(4px)'
+  },
+  showStyle = {
+    opacity: 1,
+    translate: '0 0',
+    filter: 'none'
+  },
   className = ''
 }) => {
   const articleRef = React.createRef()
+  const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle))
+  const [didCallBack, setDidCallBack] = useState(false)
 
   useEffect(() => {
-    const options = { root: null, rootMargin: '0px', threshold }
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: threshold / 100
+    }
 
     const observer = new IntersectionObserver(
       (entries, observer) =>
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add(styles.show)
+            setStyle(Object.assign({}, baseStyle, showStyle))
             if (!reAnimate) {
               observer.unobserve(entry.target)
             }
+            if (!didCallBack) {
+              callBack(entry)
+              setDidCallBack(true)
+            }
           } else {
-            entry.target.classList.remove(styles.show)
+            setStyle(Object.assign({}, baseStyle, hiddenStyle))
+            setDidCallBack(false)
           }
-          callBack(entry)
         }),
       options
     )
@@ -35,7 +56,7 @@ export const TransitionScroll = ({
   }, [articleRef])
 
   return (
-    <div ref={articleRef} className={`${styles.hidden} ${className}`}>
+    <div ref={articleRef} style={style} className={styles.baseStyle}>
       {children}
     </div>
   )
@@ -44,7 +65,12 @@ export const TransitionScroll = ({
 TransitionScroll.propTypes = {
   threshold: PropTypes.number,
   reAnimate: PropTypes.bool,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  callBack: PropTypes.func,
+  baseStyle: PropTypes.object,
+  hiddenStyle: PropTypes.object,
+  showStyle: PropTypes.object,
+  className: PropTypes.string
 }
 
 export default TransitionScroll
