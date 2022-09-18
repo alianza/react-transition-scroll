@@ -35,7 +35,7 @@ class Example extends Component {
   render() {
     return(
       <TransitionScroll options... >
-        <YourComponentToAnimate />
+        <YourComponentToAnimateOnScroll />
       </TransitionScroll>
     )
   }
@@ -44,14 +44,14 @@ class Example extends Component {
 
 ## Options
 
-| Name          | Type           | Default                                                    | Description                                                                                     |
-|---------------|----------------|------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| `threshold`   | `number`       | `0`                                                        | `Percentage of element that has to be in view to trigger transition (number between 0 and 100)` |
-| `reAnimate`   | `boolean`      | `false`                                                    | `Whether to reanimate if element enters viewport again`                                         |
-| `baseStyle`   | `Style Object` | `{}`                                                       | `Base styles to apply to transition element`                                                    |
-| `hiddenStyle` | `Style Object` | `{ opacity: 1, translate: '0 12px', filter: 'blur(4px)' }` | `Styles to apply to transition element when hidden`                                             |
-| `showStyle`   | `Style Object` | `{ opacity: 0, translate: '0 0', filter: 'none' }`         | `Styles to apply to transition element when hidden`                                             |
-| `className`   | `string`       | `''`                                                       | `Classname to apply to the transition element`                                                  |
+| Name          | Type           | Default                                                    | Description                                                                                   |
+|---------------|----------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `threshold`   | `number`       | `0`                                                        | Percentage of element that has to be in view to trigger transition (number between 0 and 100) |
+| `reAnimate`   | `boolean`      | `false`                                                    | Whether to reanimate if element enters viewport again                                         |
+| `baseStyle`   | `Style Object` | `{}`                                                       | Base styles to apply to transition element                                                    |
+| `hiddenStyle` | `Style Object` | `{ opacity: 1, translate: '0 12px', filter: 'blur(4px)' }` | Styles to apply to transition element when hidden                                             |
+| `showStyle`   | `Style Object` | `{ opacity: 0, translate: '0 0', filter: 'none' }`         | Styles to apply to transition element when hidden                                             |
+| `className`   | `string`       | `''`                                                       | Classname to apply to the transition element                                                  |
 
 ## Features
 
