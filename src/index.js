@@ -63,7 +63,7 @@ export const TransitionScroll = ({
   }, [])
 
   return (
-    <div ref={articleRef} style={style} className={styles.baseStyle}>
+    <div ref={articleRef} style={style} className={`${styles.baseStyle} ${className}`}>
       {children}
     </div>
   )
