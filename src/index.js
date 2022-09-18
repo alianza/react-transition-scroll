@@ -60,7 +60,7 @@ export const TransitionScroll = ({
     }
 
     return () => observer?.disconnect()
-  }, [articleRef])
+  }, [])
 
   return (
     <div ref={articleRef} style={style} className={styles.baseStyle}>
