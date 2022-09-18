@@ -95,7 +95,7 @@ const App = () => {
             </CodeBlock>
           </TransitionScroll>
 
-          <TransitionScroll baseStyle={{ marginBlock: "4em" }} hiddenStyle={{ opacity: .2, translate: "84px 0" }}>
+          <TransitionScroll reAnimate baseStyle={{ marginBlock: "4em" }} hiddenStyle={{ opacity: .2, translate: "84px 0" }}>
             <CodeBlock className={styles.codeRight}>
               {`<TransitionScroll hiddenStyle={{ opacity: .2, translate: '84px 0' }}>`}
               <h1>Different hidden style</h1>
@@ -103,7 +103,7 @@ const App = () => {
             </CodeBlock>
           </TransitionScroll>
 
-          <TransitionScroll baseStyle={{ marginBlock: "4em" }}
+          <TransitionScroll baseStyle={{ marginBlock: "4em" }} reAnimate
                             showStyle={{ backgroundColor: "blue", color: "white", padding: "1em" }}>
             <CodeBlock className={styles.codeRight}>
               {`<TransitionScroll showStyle={{ backgroundColor: 'blue', color: 'white', padding: '1em' }}>`}
