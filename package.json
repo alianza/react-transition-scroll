@@ -1,6 +1,6 @@
 {
   "name": "react-transition-scroll",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Easily &amp; Beautifully create scroll transitions in react!",
   "author": "alianza",
   "license": "MIT",
@@ -12,7 +12,6 @@
     "node": ">=10"
   },
   "scripts": {
-    "publish": "npm run build && npm publish",
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "prepare": "run-s build",
