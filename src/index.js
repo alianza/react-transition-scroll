@@ -31,28 +31,35 @@ export const TransitionScroll = ({
       threshold: threshold / 100
     }
 
-    const observer = new IntersectionObserver(
-      (entries, observer) =>
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setStyle(Object.assign({}, baseStyle, showStyle))
-            if (!reAnimate) {
-              observer.unobserve(entry.target)
-            }
-            if (!didCallBack) {
-              callBack(entry)
-              setDidCallBack(true)
-            }
-          } else {
-            setStyle(Object.assign({}, baseStyle, hiddenStyle))
-            setDidCallBack(false)
-          }
-        }),
-      options
-    )
+    let observer;
 
-    observer.observe(articleRef.current)
-    return () => observer.disconnect()
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries, observer) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setStyle(Object.assign({}, baseStyle, showStyle))
+              if (!reAnimate) {
+                observer.unobserve(entry.target)
+              }
+              if (!didCallBack) {
+                callBack(entry)
+                setDidCallBack(true)
+              }
+            } else {
+              setStyle(Object.assign({}, baseStyle, hiddenStyle))
+              setDidCallBack(false)
+            }
+          }),
+        options
+      )
+
+      observer.observe(articleRef.current)
+    }  else {
+      setStyle(Object.assign({}, baseStyle, showStyle))
+    }
+
+    return () => observer?.disconnect()
   }, [articleRef])
 
   return (

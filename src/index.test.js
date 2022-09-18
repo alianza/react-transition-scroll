@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import { TransitionScroll } from '.'
 
 describe('ExampleComponent', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(TransitionScroll).toBeTruthy()
   })
 })
