@@ -2,6 +2,7 @@
   "name": "react-transition-scroll",
   "version": "1.0.4",
   "description": "Easily &amp; Beautifully create scroll transitions in react!",
+  "homepage": "https://alianza.github.io/react-transition-scroll/",
   "author": "alianza",
   "license": "MIT",
   "repository": "alianza/react-transition-scroll",
