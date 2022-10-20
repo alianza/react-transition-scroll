@@ -4,7 +4,6 @@
 
 [![NPM](https://img.shields.io/npm/v/react-transition-scroll.svg)](https://www.npmjs.com/package/react-transition-scroll) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-
 ## Introduction
 
 `react-transition-scroll` is a lightweight library to easily and
@@ -55,9 +54,10 @@ class Example extends Component {
 
 ## Features
 
-
-👌 Honors prefers-reduced-motion media query  
-🚀 Uses IntersectionObserver API (Blazingly fast)
+😮‍💨 Simple syntax  
+👌 Honors `prefers-reduced-motion` media query  
+🚀 Uses IntersectionObserver API (Blazingly fast)  
+⛔ 0 dependencies!
 
 ## License
 
