@@ -1,6 +1,6 @@
 {
   "name": "react-transition-scroll",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Easily &amp; Beautifully create scroll transitions in react!",
   "homepage": "https://alianza.github.io/react-transition-scroll/",
   "author": "alianza",
@@ -22,7 +22,7 @@
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build",
-    "publish": "run-s build && npm publish"
+    "publishToNpm": "run-s build && npm publish"
   },
   "peerDependencies": {
     "react": "^18.2.0"
