@@ -16,9 +16,11 @@ const App = () => {
         <div>
           <img src={logo} alt="logo" />
         </div>
+
         <div>
           <p className={styles.title}>React Scroll Animation Example</p>
         </div>
+
         <div className={styles.linkContainer}>
           <a className={styles.link} href={packageUrl}
              target="_blank"
@@ -27,6 +29,7 @@ const App = () => {
           </a>
         </div>
       </header>
+
       <main className={styles.main}>
         <div className={styles.container}>
           <TransitionScroll reAnimate>

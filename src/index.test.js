@@ -1,6 +1,6 @@
 import { TransitionScroll } from '.'
 
-describe('ExampleComponent', () => {
+describe('TransitionScroll component', () => {
   it('is truthy', () => {
     expect(TransitionScroll).toBeTruthy()
   })
