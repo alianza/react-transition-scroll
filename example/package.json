@@ -16,7 +16,8 @@
     "react-generic-table": "file:.."
   },
   "devDependencies": {
-    "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
+    "tailwindcss": "^3.3.3"
   },
   "browserslist": [
     ">0.2%",
