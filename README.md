@@ -1,25 +1,25 @@
-# react-generic-table
+# react-transition-scroll
 
-> A generic but very usable table component for react with built-in sorting, 
-> configurable cell rendering & item counts, actions support with callbacks, out-of-the-box sorting & loading states and more!
+> Easily &amp; Beautifully create scroll transitions in react!
 
-[![NPM](https://img.shields.io/npm/v/react-generic-table.svg)](https://www.npmjs.com/package/react-generic-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-transition-scroll.svg)](https://www.npmjs.com/package/react-transition-scroll) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Introduction
 
-`react-generic-table` is a generic table component for react to display data in a table format. It supports sorting,
-custom cell rendering, configurable item counts, actions with callbacks, out-of-the-box sorting & loading states and more!
+`react-transition-scroll` is a lightweight library to easily and
+beautifully implement scroll animations/transition in react. It is built on top of the modern
+IntersectionObserver API. It covers most use cases for scroll animations and transitions.
 
-Check out examples [here](https://alianza.github.io/react-generic-table/)!
+Check out examples [here](https://alianza.github.io/react-transition-scroll/)!
 
 ## Install
 Npm:
 ```bash
-npm install --save react-generic-table
+npm install --save react-transition-scroll
 ```
 Yarn:
 ```bash
-yarn add --save react-generic-table
+yarn add --save react-transition-scroll
 ```
 
 ## Usage
@@ -27,15 +27,15 @@ yarn add --save react-generic-table
 ```jsx
 import React, { Component } from 'react'
 
-import { TransitionScroll } from 'react-generic-table'
-import 'react-generic-table/dist/index.css'
+import { TransitionScroll } from 'react-transition-scroll'
+import 'react-transition-scroll/dist/index.css'
 
 class Example extends Component {
   render() {
     return(
-      <GenericTable
-        {...options}
-      />
+      <TransitionScroll options... >
+        <YourComponentToAnimateOnScroll />
+      </TransitionScroll>
     )
   }
 }

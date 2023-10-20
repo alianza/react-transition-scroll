@@ -31,12 +31,12 @@
 }
 
 .main {
-    min-height: 100vh;
+    min-height: 200vh;
 
     .container {
         margin-inline: auto;
         max-width: 900px;
-        padding: 1em;
+        padding-inline: 1em;
 
         img {
             max-width: 100%;
