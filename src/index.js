@@ -181,11 +181,9 @@ function GenericTableDataRow({ obj, columns, actions, onRowAction }) {
 }
 
 function IconLink({ href = "", onClick, Icon, title, label, ...props }) {
-  const utilStyles = {};
-
   return (
     <a
-      className={`${utilStyles.link}group flex`}
+      className="underline decoration-transparent transition-colors duration-300 ease-in-out touch:decoration-inherit hover:duration-100 hover:decoration-inherit group flex"
       href={href}
       onClick={onClick}
       title={title ? title : "New"}

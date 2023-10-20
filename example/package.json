@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "run-p start tailwindcss",
+    "tailwindcss": "npx tailwindcss -i ./src/index.css -o ./build/static/css/index.css --watch",
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
     "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
     "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
@@ -18,7 +20,8 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "npm-run-all": "^4.1.5"
   },
   "browserslist": [
     ">0.2%",

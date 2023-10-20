@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import styles from "./app.module.scss";
 import utilStyles from "./utils.module.scss";
+import "./index.css";
 
 import hljs from "highlight.js/lib/core";
 import html from "highlight.js/lib/languages/xml";
@@ -12,11 +13,10 @@ import "react-generic-table/dist/index.css";
 const packageUrl = "https://npmjs.com/package/react-generic-table";
 
 const App = () => {
-
   useEffect(() => {
     hljs.registerLanguage("html", html);
     hljs.highlightAll();
-    }, []);
+  }, []);
 
   return (
     <div className="App">
@@ -31,7 +31,7 @@ const App = () => {
 
         <div className={styles.linkContainer}>
           <a
-            className={`${utilStyles.link} text-neutral-100`}
+            className={`${utilStyles.link} tw-text-neutral-50`}
             href={packageUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -41,8 +41,8 @@ const App = () => {
         </div>
       </header>
 
-      <main className={styles.main}>
-        <div className={styles.container}>
+      <main className="tw-min-h-screen tw-text-neutral-900 tw-bg-neutral-50 dark:tw-bg-neutral-900 dark:tw-text-neutral-50">
+        <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
           <p>
             Simple feed data and indicate what columns you want to display!
             {/*  Nice explanation with emojis */}
@@ -51,10 +51,10 @@ const App = () => {
             </span>
           </p>
           <ul>
-            <li>⚙️ Configurable</li>
-            <li>🔀 Out-of-the-box sorting</li>
-            <li>🔄 Loading states</li>
-            <li></li>
+            <li className="tw-text-neutral-900 dark:tw-text-neutral-50">⚙️ Configurable</li>
+            <li className="tw-text-neutral-900 dark:tw-text-neutral-50">🔀 Out-of-the-box sorting</li>
+            <li className="tw-text-neutral-900 dark:tw-text-neutral-50">🔄 Loading states</li>
+            <li className="tw-text-neutral-900 dark:tw-text-neutral-50"></li>
           </ul>
           <pre>
             <code>
@@ -69,13 +69,14 @@ const App = () => {
               `}
             </code>
           </pre>
-          <div className={styles.container}>
+          <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
             <GenericTable
               objArray={[
                 { id: 1, name: "J.W.", age: "25", profession: "Developer" },
                 { id: 2, name: "Lea", age: "22", profession: "Journalist" },
               ]}
               columns={["name", "age", "profession"]}
+              newLink="#"
             />
           </div>
         </div>
