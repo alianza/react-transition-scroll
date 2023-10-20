@@ -30,31 +30,6 @@
     }
 }
 
-.main {
-    min-height: 200vh;
-
-    .container {
-        margin-inline: auto;
-        max-width: 900px;
-        padding-inline: 1em;
-
-        img {
-            max-width: 100%;
-        }
-
-        .codeRight {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .propsList {
-            li {
-                margin-bottom: 1em;
-            }
-        }
-    }
-}
-
 .footer {
     background: cornflowerblue;
     display: flex;
