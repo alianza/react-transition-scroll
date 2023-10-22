@@ -1,25 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logo from "./logo.svg";
 import styles from "./app.module.scss";
 import utilStyles from "./utils.module.scss";
 import "./index.css";
 
-import hljs from "highlight.js/lib/core";
-import html from "highlight.js/lib/languages/xml";
-
 import GenericTable from "react-generic-table";
+const scope = { GenericTable };
 import "react-generic-table/dist/index.css";
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 
 const packageUrl = "https://npmjs.com/package/react-generic-table";
 
 const App = () => {
-  useEffect(() => {
-    hljs.registerLanguage("html", html);
-    hljs.highlightAll();
-  }, []);
-
   return (
-    <div className="App">
+    <div className={`${utilStyles.App} App`}>
       <header className={styles.header}>
         <div>
           <img src={logo} alt="logo" />
@@ -43,41 +37,64 @@ const App = () => {
 
       <main className="tw-min-h-screen tw-text-neutral-900 tw-bg-neutral-50 dark:tw-bg-neutral-900 dark:tw-text-neutral-50">
         <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
-          <p>
-            Simple feed data and indicate what columns you want to display!
-            {/*  Nice explanation with emojis */}
-            <span role="img" aria-label="smile">
-              😄
-            </span>
+          <h2 className="tw-text-3xl tw-mb-2">Usage</h2>
+          <p className="tw-text-lg">
+            Simply feed data and indicate what columns you want to display and in what order! 😄
           </p>
-          <ul>
+          <ul className="p-2">
             <li className="tw-text-neutral-900 dark:tw-text-neutral-50">⚙️ Configurable</li>
             <li className="tw-text-neutral-900 dark:tw-text-neutral-50">🔀 Out-of-the-box sorting</li>
             <li className="tw-text-neutral-900 dark:tw-text-neutral-50">🔄 Loading states</li>
             <li className="tw-text-neutral-900 dark:tw-text-neutral-50"></li>
           </ul>
-          <pre>
-            <code>
-              {`
-              <GenericTable
+          <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
+            <LiveProvider
+              scope={scope}
+              code={` 
+            <GenericTable
                 objArray={[
                   { id: 1, name: "J.W.", age: "25", profession: "Developer" },
                   { id: 2, name: "Lea", age: "22", profession: "Journalist" },
+                  { id: 3, name: "Max", age: "34", profession: "Taxi Driver" }
                 ]}
                 columns={["name", "age", "profession"]}
-              />
-              `}
-            </code>
-          </pre>
-          <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
-            <GenericTable
-              objArray={[
-                { id: 1, name: "J.W.", age: "25", profession: "Developer" },
-                { id: 2, name: "Lea", age: "22", profession: "Journalist" },
-              ]}
-              columns={["name", "age", "profession"]}
-              newLink="#"
+                newLink="#"
             />
+            `}
+            >
+              <LiveEditor className={utilStyles.codeEditor} />
+              <LiveError />
+              <LivePreview className={utilStyles.codePreview} />
+            </LiveProvider>
+          </div>
+
+          <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
+            <LiveProvider
+              scope={scope}
+              code={` 
+            <GenericTable
+                objArray={[
+                  { id: 1, name: "J.W.", age: "25", profession: "Developer" },
+                  { id: 2, name: "Lea", age: "22", profession: "Journalist" },
+                  { id: 3, name: "Max", age: "34", profession: "Taxi Driver" }
+                ]}
+                columns={["name", "age", "profession"]}
+                newLink="#"
+                actions={[
+                  { edit: (obj) => <a href="#" onClick={() => alert(JSON.stringify(obj)) }>Edit</a> },
+                  { view: (obj) => <a href="#">View</a> },
+                  { remove: (obj) => <a href="#">Delete</a> }
+                ]}
+                entityName="person"
+                actionsColumnName="Tasks"
+                showCount={true}
+            />
+            `}
+            >
+              <LiveEditor className={utilStyles.codeEditor} />
+              <LiveError />
+              <LivePreview className={utilStyles.codePreview} />
+            </LiveProvider>
           </div>
         </div>
       </main>

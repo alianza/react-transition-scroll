@@ -33,3 +33,19 @@
 .responsiveContainer {
     @apply sm:tw-px-12 md:tw-px-32 lg:tw-px-48;
 }
+
+.App {
+    a {
+        @apply link;
+    }
+}
+
+.codeEditor {
+    pre {
+        @apply tw-shadow-2xl tw-rounded focus:tw-ring-2 focus:tw-ring-neutral-500 focus:tw-ring-opacity-50;
+    }
+}
+
+.codePreview {
+    @apply tw-mt-8 tw-drop-shadow-2xl;
+}

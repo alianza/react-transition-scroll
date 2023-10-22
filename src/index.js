@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { capitalize, isString, sOrNoS, omit, deepGet } from "./lib/commonUtils";
 import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
@@ -65,10 +65,12 @@ function GenericTable({ objArray = null, columns, actions, entityName = "item", 
         <thead className="bg-neutral-200 dark:bg-neutral-700">
           <tr>
             {columns.map((col) => {
+              let isActionsColumn = false;
               let colName = isString(col) ? col : Object.values(col)[0].alias || Object.keys(col)[0];
               const colProp = isString(col) ? col : Object.keys(col)[0];
               if (colName === "actions") {
                 colName = actionsColumnName || colName;
+                isActionsColumn = true;
               }
 
               return (
@@ -81,7 +83,7 @@ function GenericTable({ objArray = null, columns, actions, entityName = "item", 
                     {columnSortDirection[colProp] === "desc" && (
                       <ChevronUpIcon onClick={() => sort(colProp, "asc")} className="h-6 w-6 cursor-pointer" />
                     )}
-                    {colName !== "actions" && !columnSortDirection[colProp] && (
+                    {!isActionsColumn && !columnSortDirection[colProp] && (
                       <ChevronUpDownIcon onClick={() => sort(colProp, "asc")} className="h-6 w-6 cursor-pointer" />
                     )}
                   </div>
@@ -159,7 +161,15 @@ function GenericTableDataRow({ obj, columns, actions, onRowAction }) {
         console.warn(`No element function provided for action ${actionObj}`);
         return null;
       }
-      return cloneElement(elementFunc(obj), { onClick: () => onRowAction(action, obj), key: action });
+      return cloneElement(elementFunc(obj), {
+        onClick: elementFunc(obj).props.onClick
+          ? () => {
+              elementFunc(obj).props.onClick();
+              onRowAction(action, obj);
+            }
+          : () => onRowAction(action, obj),
+        key: action,
+      });
     });
 
   return (

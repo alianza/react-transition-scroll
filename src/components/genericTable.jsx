@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { capitalize, isString, sOrNoS } from '../lib/commonUtils';
-import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon, PlusIcon } from '@heroicons/react/20/solid';
-import TableDataRow from './genericTableDataRow';
-import IconLink from './common/IconLink';
-import Loader from './common/loader';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useEffect, useState } from "react";
+import { capitalize, isString, sOrNoS } from "../lib/commonUtils";
+import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon, PlusIcon } from "@heroicons/react/20/solid";
+import GenericTableDataRow from "./genericTableDataRow";
+import IconLink from "./common/IconLink";
+import Loader from "./common/loader";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const duration = 250; // default auto-animate duration
 
@@ -22,31 +22,38 @@ const duration = 250; // default auto-animate duration
  * @returns {JSX.Element} - Generic table component
  * @constructor - GenericTable
  */
-export default function GenericTable({ objArray = null, columns, actions, entityName = 'item', onAction = () => {}, ...options }) {
+export default function GenericTable({
+  objArray = null,
+  columns,
+  actions,
+  entityName = "item",
+  onAction = () => {},
+  ...options
+}) {
   const [columnSortDirection, setColumnSortDirection] = useState({});
   const [loading, setLoading] = useState(objArray === null);
   const [objArrayState, setObjArrayState] = useState(objArray || []);
   const [tableBody, enableAnimations] = useAutoAnimate();
 
-  if (actions?.length) columns = [...columns, 'actions'];
+  if (actions?.length) columns = [...columns, "actions"];
 
   useEffect(() => {
-    sort(columns[0], 'asc'); // Default ascending sort on first column
+    sort(columns[0], "asc"); // Default ascending sort on first column
   }, []);
 
   useEffect(() => {
     animate(() => {
       setObjArrayState(objArray || []);
       setLoading(objArray === null);
-      if (objArray) sort(columns[0], 'asc'); // Default initial ascending sort on first column
+      if (objArray) sort(columns[0], "asc"); // Default initial ascending sort on first column
     });
   }, [objArray]);
 
   const sort = (column, direction) => {
     setObjArrayState((prevObjArrayState) =>
       prevObjArrayState.sort((a, b) => {
-        if (a[column] > b[column]) return direction === 'asc' ? 1 : -1;
-        if (a[column] < b[column]) return direction === 'asc' ? -1 : 1;
+        if (a[column] > b[column]) return direction === "asc" ? 1 : -1;
+        if (a[column] < b[column]) return direction === "asc" ? -1 : 1;
         return 0;
       }),
     );
@@ -62,29 +69,31 @@ export default function GenericTable({ objArray = null, columns, actions, entity
   const { showCount, newLink, actionsColumnName } = options;
 
   return (
-    <div className={`flex flex-col items-center overflow-y-hidden`}>
-      <table className="relative mx-auto table-auto">
+    <div className="flex flex-col items-center overflow-y-hidden">
+      <table className="relative mx-auto table-auto text-neutral-900 dark:text-neutral-100">
         <thead className="bg-neutral-200 dark:bg-neutral-700">
           <tr>
             {columns.map((col) => {
+              let isActionsColumn = false;
               let colName = isString(col) ? col : Object.values(col)[0].alias || Object.keys(col)[0];
               const colProp = isString(col) ? col : Object.keys(col)[0];
-              if (colName === 'actions') {
+              if (colName === "actions") {
                 colName = actionsColumnName || colName;
+                isActionsColumn = true;
               }
 
               return (
                 <th key={colName} className="p-3 sm:p-4">
                   <div className={`flex justify-center gap-2`}>
                     <p className="font-bold">{capitalize(colName)}</p>
-                    {columnSortDirection[colProp] === 'asc' && (
-                      <ChevronDownIcon onClick={() => sort(colProp, 'desc')} className="h-6 w-6 cursor-pointer" />
+                    {columnSortDirection[colProp] === "asc" && (
+                      <ChevronDownIcon onClick={() => sort(colProp, "desc")} className="h-6 w-6 cursor-pointer" />
                     )}
-                    {columnSortDirection[colProp] === 'desc' && (
-                      <ChevronUpIcon onClick={() => sort(colProp, 'asc')} className="h-6 w-6 cursor-pointer" />
+                    {columnSortDirection[colProp] === "desc" && (
+                      <ChevronUpIcon onClick={() => sort(colProp, "asc")} className="h-6 w-6 cursor-pointer" />
                     )}
-                    {colName !== 'actions' && !columnSortDirection[colProp] && (
-                      <ChevronUpDownIcon onClick={() => sort(colProp, 'asc')} className="h-6 w-6 cursor-pointer" />
+                    {!isActionsColumn && !columnSortDirection[colProp] && (
+                      <ChevronUpDownIcon onClick={() => sort(colProp, "asc")} className="h-6 w-6 cursor-pointer" />
                     )}
                   </div>
                 </th>
@@ -107,8 +116,8 @@ export default function GenericTable({ objArray = null, columns, actions, entity
             </tr>
           )}
           {objArrayState.map((obj) => (
-            <TableDataRow
-              key={obj._id}
+            <GenericTableDataRow
+              key={obj.id}
               obj={obj}
               columns={columns}
               actions={actions}
@@ -138,4 +147,4 @@ export default function GenericTable({ objArray = null, columns, actions, entity
       </table>
     </div>
   );
-};
+}
