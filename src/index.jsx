@@ -3,7 +3,6 @@ import { capitalize, isString, sOrNoS, omit, deepGet } from "./lib/commonUtils";
 import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { cloneElement } from "react";
-import utilStyles from "./utils.module.scss";
 
 const duration = 250; // default auto-animate duration
 
@@ -61,9 +60,7 @@ function GenericTable({ objArray = null, columns, actions, entityName = "item", 
   const { showCount, newLink, actionsColumnName } = options;
 
   return (
-    <div
-      className={`${utilStyles.reactGenericTable} react-generic-table rgt-tw-flex rgt-tw-flex-col rgt-tw-items-center rgt-tw-overflow-y-hidden`}
-    >
+    <div className="react-generic-table rgt-tw-flex rgt-tw-flex-col rgt-tw-items-center rgt-tw-overflow-y-hidden">
       <table className="rgt-tw-relative rgt-tw-mx-auto rgt-tw-table-auto rgt-tw-text-neutral-900 dark:rgt-tw-text-neutral-100">
         <thead className="rgt-tw-bg-neutral-200 dark:rgt-tw-bg-neutral-700">
           <tr>

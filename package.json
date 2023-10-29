@@ -6,9 +6,9 @@
   "author": "alianza",
   "license": "MIT",
   "repository": "alianza/react-generic-table",
-  "main": "dist/index.js",
+  "main": "dist/index.jsx",
   "module": "dist/index.modern.js",
-  "source": "src/index.js",
+  "source": "src/index.jsx",
   "engines": {
     "node": ">=14.0.0 <=17.0.0"
   },
