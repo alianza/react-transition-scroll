@@ -19,19 +19,19 @@
 //}
 
 .link {
-    @apply tw-underline tw-decoration-transparent tw-transition-colors tw-duration-300 tw-ease-in-out;
+    @apply underline decoration-transparent transition-colors duration-300 ease-in-out;
 
     &:hover {
-        @apply tw-duration-100 tw-decoration-inherit;
+        @apply duration-100 decoration-inherit;
     }
 
     @media (hover: none) {
-        @apply tw-decoration-inherit;
+        @apply decoration-inherit;
     }
 }
 
 .responsiveContainer {
-    @apply sm:tw-px-12 md:tw-px-32 lg:tw-px-48;
+    @apply sm:px-12 md:px-32 lg:px-48;
 }
 
 .App {
@@ -42,10 +42,10 @@
 
 .codeEditor {
     pre {
-        @apply tw-shadow-2xl tw-rounded focus:tw-ring-2 focus:tw-ring-neutral-500 focus:tw-ring-opacity-50;
+        @apply shadow-2xl rounded focus:ring-2 focus:ring-neutral-500 focus:ring-opacity-50;
     }
 }
 
 .codePreview {
-    @apply tw-mt-8 tw-drop-shadow-2xl;
+    @apply mt-8 drop-shadow-2xl;
 }

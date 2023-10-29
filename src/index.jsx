@@ -3,6 +3,7 @@ import { capitalize, isString, sOrNoS, omit, deepGet } from "./lib/commonUtils";
 import { ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { cloneElement } from "react";
+import utilStyles from "./utils.module.scss";
 
 const duration = 250; // default auto-animate duration
 
@@ -60,9 +61,11 @@ function GenericTable({ objArray = null, columns, actions, entityName = "item", 
   const { showCount, newLink, actionsColumnName } = options;
 
   return (
-    <div className="flex flex-col items-center overflow-y-hidden">
-      <table className="relative mx-auto table-auto text-neutral-900 dark:text-neutral-100">
-        <thead className="bg-neutral-200 dark:bg-neutral-700">
+    <div
+      className={`${utilStyles.reactGenericTable} react-generic-table rgt-tw-flex rgt-tw-flex-col rgt-tw-items-center rgt-tw-overflow-y-hidden`}
+    >
+      <table className="rgt-tw-relative rgt-tw-mx-auto rgt-tw-table-auto rgt-tw-text-neutral-900 dark:rgt-tw-text-neutral-100">
+        <thead className="rgt-tw-bg-neutral-200 dark:rgt-tw-bg-neutral-700">
           <tr>
             {columns.map((col) => {
               let isActionsColumn = false;
@@ -74,17 +77,26 @@ function GenericTable({ objArray = null, columns, actions, entityName = "item", 
               }
 
               return (
-                <th key={colName} className="p-3 sm:p-4">
-                  <div className={`flex justify-center gap-2`}>
-                    <p className="font-bold">{capitalize(colName)}</p>
+                <th key={colName} className="rgt-tw-p-3 sm:rgt-tw-p-4">
+                  <div className="rgt-tw-flex rgt-tw-justify-center rgt-tw-gap-2">
+                    <p className="rgt-tw-font-bold">{capitalize(colName)}</p>
                     {columnSortDirection[colProp] === "asc" && (
-                      <ChevronDownIcon onClick={() => sort(colProp, "desc")} className="h-6 w-6 cursor-pointer" />
+                      <ChevronDownIcon
+                        onClick={() => sort(colProp, "desc")}
+                        className="rgt-tw-h-6 rgt-tw-w-6 rgt-tw-cursor-pointer"
+                      />
                     )}
                     {columnSortDirection[colProp] === "desc" && (
-                      <ChevronUpIcon onClick={() => sort(colProp, "asc")} className="h-6 w-6 cursor-pointer" />
+                      <ChevronUpIcon
+                        onClick={() => sort(colProp, "asc")}
+                        className="rgt-tw-h-6 rgt-tw-w-6 rgt-tw-cursor-pointer"
+                      />
                     )}
                     {!isActionsColumn && !columnSortDirection[colProp] && (
-                      <ChevronUpDownIcon onClick={() => sort(colProp, "asc")} className="h-6 w-6 cursor-pointer" />
+                      <ChevronUpDownIcon
+                        onClick={() => sort(colProp, "asc")}
+                        className="rgt-tw-h-6 rgt-tw-w-6 rgt-tw-cursor-pointer"
+                      />
                     )}
                   </div>
                 </th>
@@ -93,14 +105,14 @@ function GenericTable({ objArray = null, columns, actions, entityName = "item", 
           </tr>
         </thead>
         <tbody
-          className="bg-neutral-50 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-neutral-400 dark:bg-neutral-800"
+          className="rgt-tw-bg-neutral-50 after:rgt-tw-absolute after:rgt-tw-bottom-0 after:rgt-tw-left-0 after:rgt-tw-h-[2px] after:rgt-tw-w-full after:rgt-tw-bg-neutral-400 dark:rgt-tw-bg-neutral-800"
           ref={tableBody}
         >
           {!objArrayState.length && (
             <tr>
-              <td className="p-2 sm:p-4" colSpan={columns.length}>
-                <div className="flex justify-center gap-2">
-                  {loading ? <Loader className="mx-auto my-24" /> : `No ${entityName}s found.`}
+              <td className="rgt-tw-sm:p-4 rgt-tw-p-2" colSpan={columns.length}>
+                <div className="rgt-tw-flex rgt-tw-justify-center rgt-tw-gap-2">
+                  {loading ? <Loader className="rgt-tw-mx-auto rgt-tw-my-24" /> : `No ${entityName}s found.`}
                   {newLink && !loading && <IconLink title={`New ${entityName}`} href={newLink} Icon={PlusIcon} />}
                 </div>
               </td>
@@ -127,7 +139,7 @@ function GenericTable({ objArray = null, columns, actions, entityName = "item", 
               {showCount && (
                 <>
                   {columns.length > 2 && <td colSpan={columns.length - (newLink ? 2 : 1)} />}
-                  <td className="text-end">
+                  <td className="rgt-tw-text-end">
                     {objArrayState.length} {capitalize(entityName) + sOrNoS(objArrayState.length)}
                   </td>
                 </>
@@ -173,15 +185,19 @@ function GenericTableDataRow({ obj, columns, actions, onRowAction }) {
     });
 
   return (
-    <tr className="relative after:absolute after:left-0 after:h-[2px] after:w-full after:bg-neutral-400">
+    <tr className="rgt-tw-relative after:rgt-tw-absolute after:rgt-tw-left-0 after:rgt-tw-h-[2px] after:rgt-tw-w-full after:rgt-tw-bg-neutral-400">
       {Object.entries(objColumnMap).map(([colName, colData]) => {
         const { value, colProps } = colData;
         return colName === "actions" ? (
-          <td key={colName} className="p-3 sm:p-4">
-            <div className="flex justify-center gap-2">{formatActions(colName, value)}</div>
+          <td key={colName} className="rgt-tw-p-3 sm:rgt-tw-p-4">
+            <div className="rgt-tw-flex rgt-tw-justify-center rgt-tw-gap-2">{formatActions(colName, value)}</div>
           </td>
         ) : (
-          <td key={colName} className={`p-3 sm:p-4 ${colProps?.className}`} {...omit(colProps, colPropsToOmit)}>
+          <td
+            key={colName}
+            className={`rgt-tw-p-3 sm:rgt-tw-p-4 ${colProps?.className}`}
+            {...omit(colProps, colPropsToOmit)}
+          >
             {colProps?.capitalize === false ? value.toString() : capitalize(value)}
           </td>
         );
@@ -193,14 +209,14 @@ function GenericTableDataRow({ obj, columns, actions, onRowAction }) {
 function IconLink({ href = "", onClick, Icon, title, label, ...props }) {
   return (
     <a
-      className="underline decoration-transparent transition-colors duration-300 ease-in-out touch:decoration-inherit hover:duration-100 hover:decoration-inherit group flex"
+      className="rgt-tw-group rgt-tw-flex rgt-tw-underline rgt-tw-decoration-transparent rgt-tw-transition-colors rgt-tw-duration-300 rgt-tw-ease-in-out hover:rgt-tw-decoration-inherit hover:rgt-tw-duration-100 touch:rgt-tw-decoration-inherit"
       href={href}
       onClick={onClick}
       title={title ? title : "New"}
       {...props}
     >
       {label && <span>{label}</span>}
-      <Icon className="h-6 w-6 transition-transform duration-300 active:scale-95 group-hover:scale-[120%] group-hover:duration-75" />
+      <Icon className="rgt-tw-h-6 rgt-tw-w-6 rgt-tw-transition-transform rgt-tw-duration-300 active:rgt-tw-scale-95 group-hover:rgt-tw-scale-[120%] group-hover:rgt-tw-duration-75" />
     </a>
   );
 }
@@ -208,13 +224,13 @@ function IconLink({ href = "", onClick, Icon, title, label, ...props }) {
 function Loader({ className }) {
   return (
     <svg
-      className={`${className} h-16 w-16 animate-spin dark:text-white`}
+      className={`${className} rgt-tw-h-16 rgt-tw-w-16 rgt-tw-animate-spin dark:rgt-tw-text-white`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
     >
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+      <circle className="rgt-tw-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+      <path className="rgt-tw-opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
     </svg>
   );
 }

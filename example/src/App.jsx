@@ -5,15 +5,15 @@ import utilStyles from "./utils.module.scss";
 import "./index.css";
 
 import GenericTable from "react-generic-table";
-const scope = { GenericTable };
 import "react-generic-table/dist/index.css";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+const scope = { GenericTable };
 
 const packageUrl = "https://npmjs.com/package/react-generic-table";
 
 const App = () => {
   return (
-    <div className={`${utilStyles.App} App`}>
+    <div className={`${utilStyles.App} App bg-neutral-50 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50`}>
       <header className={styles.header}>
         <div>
           <img src={logo} alt="logo" />
@@ -25,7 +25,7 @@ const App = () => {
 
         <div className={styles.linkContainer}>
           <a
-            className={`${utilStyles.link} tw-text-neutral-50`}
+            className={`${utilStyles.link} text-neutral-50`}
             href={packageUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -35,22 +35,21 @@ const App = () => {
         </div>
       </header>
 
-      <main className="tw-min-h-screen tw-text-neutral-900 tw-bg-neutral-50 dark:tw-bg-neutral-900 dark:tw-text-neutral-50">
-        <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
-          <h2 className="tw-text-3xl tw-mb-2">Usage</h2>
-          <p className="tw-text-lg">
+      <main className="mx-auto my-16 grid min-h-screen max-w-4xl grid-cols-2 gap-16 p-4">
+        <section>
+          <h2 className="mb-2 text-3xl">Usage</h2>
+          <p className="text-lg">
             Simply feed data and indicate what columns you want to display and in what order! 😄
           </p>
           <ul className="p-2">
-            <li className="tw-text-neutral-900 dark:tw-text-neutral-50">⚙️ Configurable</li>
-            <li className="tw-text-neutral-900 dark:tw-text-neutral-50">🔀 Out-of-the-box sorting</li>
-            <li className="tw-text-neutral-900 dark:tw-text-neutral-50">🔄 Loading states</li>
-            <li className="tw-text-neutral-900 dark:tw-text-neutral-50"></li>
+            <li className="text-neutral-900 dark:text-neutral-50">⚙️ Configurable</li>
+            <li className="text-neutral-900 dark:text-neutral-50">🔀 Out-of-the-box sorting</li>
+            <li className="text-neutral-900 dark:text-neutral-50">🔄 Loading states</li>
+            <li className="text-neutral-900 dark:text-neutral-50"></li>
           </ul>
-          <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
-            <LiveProvider
-              scope={scope}
-              code={` 
+          <LiveProvider
+            scope={scope}
+            code={` 
             <GenericTable
                 objArray={[
                   { id: 1, name: "J.W.", age: "25", profession: "Developer" },
@@ -61,17 +60,17 @@ const App = () => {
                 newLink="#"
             />
             `}
-            >
-              <LiveEditor className={utilStyles.codeEditor} />
-              <LiveError />
-              <LivePreview className={utilStyles.codePreview} />
-            </LiveProvider>
-          </div>
+          >
+            <LiveEditor className={utilStyles.codeEditor} />
+            <LiveError />
+            <LivePreview className={utilStyles.codePreview} />
+          </LiveProvider>
+        </section>
 
-          <div className="tw-mx-auto tw-max-w-4xl tw-p-4">
-            <LiveProvider
-              scope={scope}
-              code={` 
+        <section>
+          <LiveProvider
+            scope={scope}
+            code={`
             <GenericTable
                 objArray={[
                   { id: 1, name: "J.W.", age: "25", profession: "Developer" },
@@ -82,7 +81,7 @@ const App = () => {
                 newLink="#"
                 actions={[
                   { edit: (obj) => <a href="#" onClick={() => alert(JSON.stringify(obj)) }>Edit</a> },
-                  { view: (obj) => <a href="#">View</a> },
+                  { view: (obj) => <a href={'#/' + obj.id}>View</a> },
                   { remove: (obj) => <a href="#">Delete</a> }
                 ]}
                 entityName="person"
@@ -90,13 +89,12 @@ const App = () => {
                 showCount={true}
             />
             `}
-            >
-              <LiveEditor className={utilStyles.codeEditor} />
-              <LiveError />
-              <LivePreview className={utilStyles.codePreview} />
-            </LiveProvider>
-          </div>
-        </div>
+          >
+            <LiveEditor className={utilStyles.codeEditor} />
+            <LiveError />
+            <LivePreview className={utilStyles.codePreview} />
+          </LiveProvider>
+        </section>
       </main>
       <footer className={styles.footer}>
         <span>

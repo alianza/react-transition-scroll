@@ -18,6 +18,16 @@
 //    }
 //}
 
+.react-generic-table {
+    ::-webkit-scrollbar {
+        @apply rgt-tw-bg-neutral-50 dark:rgt-tw-bg-neutral-300 rgt-tw-w-3 rgt-tw-h-3;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply rgt-tw-bg-neutral-400 dark:rgt-tw-bg-neutral-500 hover:rgt-tw-bg-neutral-500 dark:hover:rgt-tw-bg-neutral-600 active:rgt-tw-bg-neutral-600 dark:active:rgt-tw-bg-neutral-700;
+    }
+}
+
 .link {
     @apply underline decoration-transparent transition-colors duration-300 ease-in-out;
 
@@ -28,8 +38,4 @@
     @media (hover: none) {
         @apply decoration-inherit;
     }
-}
-
-.responsiveContainer {
-    @apply sm:px-12 md:px-32 lg:px-48;
 }
