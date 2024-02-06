@@ -51,7 +51,6 @@ TransitionScroll.defaultProps = {
  *
  */
 
-
 export function TransitionScroll({
   threshold = 0,
   reAnimate = false,
