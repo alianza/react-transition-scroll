@@ -4,20 +4,20 @@ import PropTypes from "prop-types";
 
 
 let TransitionScrollTypes = TransitionScroll.propTypes = {
-  threshold: PropTypes.number,
-  reAnimate: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-  callBack: PropTypes.func,
-  baseStyle: PropTypes.object,
-  hiddenStyle: PropTypes.object,
-  showStyle: PropTypes.object,
-  className: PropTypes.string
+  threshold: PropTypes.number, // The percentage of the element that needs to be in view before the animation is triggered
+  reAnimate: PropTypes.bool, // Whether the element will animate again once it is scrolled out of view and back in
+  children: PropTypes.node.isRequired, // The element to animate, and it's children
+  callBack: PropTypes.func, // A callback to be called when the element is in view
+  baseStyle: PropTypes.object, // The base style of the element
+  hiddenStyle: PropTypes.object, // The style of the element when it is not intersecting with the page
+  showStyle: PropTypes.object, // The style of the element when it is intersecting with the page
+  className: PropTypes.string // Additional class names to be added to the element
 }
 
 TransitionScroll.defaultProps = {
   threshold: 0,
   reAnimate: false,
-  callBack: () => {},
+  callBack: (entry) => {},
   baseStyle: {},
   hiddenStyle: {
     opacity: .5,
@@ -57,7 +57,7 @@ export function TransitionScroll({
   threshold = 0,
   reAnimate = false,
   children,
-  callBack = () => {},
+  callBack = (entry) => {},
   baseStyle = {},
   hiddenStyle = {
     opacity: .5,
@@ -71,7 +71,7 @@ export function TransitionScroll({
   },
   className = ''
 }) {
-  const articleRef = React.createRef()
+  const elementRef = React.createRef()
   const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle))
   const [didCallBack, setDidCallBack] = useState(false)
 
@@ -105,7 +105,7 @@ export function TransitionScroll({
         options
       )
 
-      observer.observe(articleRef.current)
+      observer.observe(elementRef.current)
     }  else {
       setStyle(Object.assign({}, baseStyle, showStyle))
     }
@@ -114,7 +114,7 @@ export function TransitionScroll({
   }, [])
 
   return (
-    <div ref={articleRef} style={style} className={`${styles.baseStyle} ${className}`}>
+    <div ref={elementRef} style={style} className={`${styles.baseStyle} ${className}`}>
       {children}
     </div>
   )
