@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import PropTypes from "prop-types";
 
-
 let TransitionScrollTypes = TransitionScroll.propTypes = {
   threshold: PropTypes.number, // The percentage of the element that needs to be in view before the animation is triggered
   reAnimate: PropTypes.bool, // Whether the element will animate again once it is scrolled out of view and back in
