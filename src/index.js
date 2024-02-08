@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import styles from './styles.module.css'
+import React, { useEffect, useState } from "react";
+import styles from "./styles.module.css";
 import PropTypes from "prop-types";
 
-let TransitionScrollTypes = TransitionScroll.propTypes = {
+let TransitionScrollTypes = (TransitionScroll.propTypes = {
   threshold: PropTypes.number, // The percentage of the element that needs to be in view before the animation is triggered
   reAnimate: PropTypes.bool, // Whether the element will animate again once it is scrolled out of view and back in
   children: PropTypes.node.isRequired, // The element to animate, and it's children
-  callBack: PropTypes.func, // A callback to be called when the element is in view
+  callBackBefore: PropTypes.func, // A callback to be called when the element is in view
+  callBackAfter: PropTypes.func, // A callback to be called when the element is in view
   baseStyle: PropTypes.object, // The base style of the element
   hiddenStyle: PropTypes.object, // The style of the element when it is not intersecting with the page
   showStyle: PropTypes.object, // The style of the element when it is intersecting with the page
-  className: PropTypes.string // Additional class names to be added to the element
-}
+  className: PropTypes.string, // Additional class names to be added to the element
+});
 
 TransitionScroll.defaultProps = {
   threshold: 0,
   reAnimate: false,
-  callBack: (entry) => {},
+  callBackBefore: (entry) => {},
+  callBackAfter: (entry) => {},
   baseStyle: {},
   hiddenStyle: {
-    opacity: .5,
-    translate: '0 12px',
-    filter: 'blur(4px)'
+    opacity: 0.5,
+    translate: "0 12px",
+    filter: "blur(4px)",
   },
   showStyle: {
     opacity: 1,
-    translate: '0 0',
-    filter: 'none'
+    translate: "0 0",
+    filter: "none",
   },
-  className: ''
-}
+  className: "",
+};
 
 /**
  *
@@ -51,71 +53,74 @@ TransitionScroll.defaultProps = {
  *
  */
 
-export function TransitionScroll({
+function TransitionScroll({
   threshold = 0,
   reAnimate = false,
   children,
-  callBack = (entry) => {},
+  callBackBefore = (entry) => {},
+  callBackAfter = (entry) => {},
   baseStyle = {},
   hiddenStyle = {
-    opacity: .5,
-    translate: '0 12px',
-    filter: 'blur(4px)'
+    opacity: 0.5,
+    translate: "0 12px",
+    filter: "blur(4px)",
   },
   showStyle = {
     opacity: 1,
-    translate: '0 0',
-    filter: 'none'
+    translate: "0 0",
+    filter: "none",
   },
-  className = ''
+  className = "",
 }) {
-  const elementRef = React.createRef()
-  const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle))
-  const [didCallBack, setDidCallBack] = useState(false)
+  const elementRef = React.createRef();
+  const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle));
+  const [didCallBack, setDidCallBack] = useState(false);
 
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: threshold / 100
-    }
+      rootMargin: "0px",
+      threshold: threshold / 100,
+    };
 
     let observer;
 
-    if ('IntersectionObserver' in window) {
+    if ("IntersectionObserver" in window) {
       observer = new IntersectionObserver(
         (entries, observer) =>
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              setStyle(Object.assign({}, baseStyle, showStyle))
+              setStyle(Object.assign({}, baseStyle, showStyle));
               if (!reAnimate) {
-                observer.unobserve(entry.target)
+                observer.unobserve(entry.target);
               }
               if (!didCallBack) {
-                callBack(entry)
-                setDidCallBack(true)
+                callBackBefore(entry);
+                const transitionDuration = getComputedStyle(entry.target).transitionDuration.replace("s", "") * 1000;
+                setTimeout(() => callBackAfter(entry), transitionDuration);
+                setDidCallBack(true);
               }
             } else {
-              setStyle(Object.assign({}, baseStyle, hiddenStyle))
-              setDidCallBack(false)
+              setStyle(Object.assign({}, baseStyle, hiddenStyle));
+              setDidCallBack(false);
             }
           }),
-        options
-      )
+        options,
+      );
 
-      observer.observe(elementRef.current)
-    }  else {
-      setStyle(Object.assign({}, baseStyle, showStyle))
+      observer.observe(elementRef.current);
+    } else {
+      setStyle(Object.assign({}, baseStyle, showStyle));
     }
 
-    return () => observer?.disconnect()
-  }, [])
+    return () => observer?.disconnect();
+  }, []);
 
   return (
     <div ref={elementRef} style={style} className={`${styles.baseStyle} ${className}`}>
       {children}
     </div>
-  )
+  );
 }
 
-export default TransitionScroll
+export default TransitionScroll;
