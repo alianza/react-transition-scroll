@@ -6,6 +6,7 @@ import { CodeBlock } from "./components/codeBlock";
 
 import TransitionScroll from "react-transition-scroll";
 import "react-transition-scroll/dist/index.css";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -227,6 +228,9 @@ const App = () => {
               <li>
                 <b>callBackAfter:</b> (Function) Callback to call when element leaves viewport (exposes intersection
                 object)
+              </li>
+              <li>
+                <b>as:</b> (String) The wrapper element to render the transition element as
               </li>
             </ul>
           </TransitionScroll>

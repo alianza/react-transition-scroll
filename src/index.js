@@ -12,6 +12,7 @@ let TransitionScrollTypes = (TransitionScroll.propTypes = {
   hiddenStyle: PropTypes.object, // The style of the element when it is not intersecting with the page
   showStyle: PropTypes.object, // The style of the element when it is intersecting with the page
   className: PropTypes.string, // Additional class names to be added to the element
+  as: PropTypes.string, // The element to be used as the wrapper
 });
 
 TransitionScroll.defaultProps = {
@@ -31,6 +32,7 @@ TransitionScroll.defaultProps = {
     filter: "none",
   },
   className: "",
+  as: "div",
 };
 
 /**
@@ -71,10 +73,13 @@ function TransitionScroll({
     filter: "none",
   },
   className = "",
+  as = "div",
 }) {
   const elementRef = React.createRef();
   const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle));
   const [didCallBack, setDidCallBack] = useState(false);
+
+  const Tag = as;
 
   useEffect(() => {
     const options = {
@@ -117,9 +122,9 @@ function TransitionScroll({
   }, []);
 
   return (
-    <div ref={elementRef} style={style} className={`${styles.baseStyle} ${className}`}>
+    <Tag ref={elementRef} style={style} className={`${styles.baseStyle} ${className}`}>
       {children}
-    </div>
+    </Tag>
   );
 }
 
