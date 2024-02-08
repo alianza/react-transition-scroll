@@ -51,6 +51,7 @@ class Example extends Component {
 | `hiddenStyle` | `Style Object` | `{ opacity: 1, translate: '0 12px', filter: 'blur(4px)' }` | Styles to apply to transition element when hidden                                             |
 | `showStyle`   | `Style Object` | `{ opacity: 0, translate: '0 0', filter: 'none' }`         | Styles to apply to transition element when hidden                                             |
 | `className`   | `string`       | `''`                                                       | Classname to apply to the transition element                                                  |
+| `as`          | `string`       | `'div'`                                                    | Wrapper HTML tag to render the transition element as                                          |
 
 ## Features
 
