@@ -85,6 +85,20 @@ const App = () => {
             </CodeBlock>
           </TransitionScroll>
 
+          <TransitionScroll
+            baseStyle={{ marginBlock: "4em", display: "block" }}
+            as="a"
+            href="https://github.com/alianza"
+            reAnimate
+          >
+            <CodeBlock>
+              {`<TransitionScroll baseStyle={{ marginBlock: "4em", display: "block" }} as="a" href="https://github.com/alianza"reAnimate>`}
+              <br />
+              <h1>As a link tag {`(<a href="..." />)`}</h1>
+              {`</TransitionScroll>`}
+            </CodeBlock>
+          </TransitionScroll>
+
           <TransitionScroll baseStyle={{ marginBlock: "4em" }} reAnimate threshold={100}>
             <CodeBlock className={styles.codeRight}>
               {`<TransitionScroll threshold={100}>`}

@@ -74,6 +74,7 @@ function TransitionScroll({
   },
   className = "",
   as = "div",
+  ...props
 }) {
   const elementRef = React.createRef();
   const [style, setStyle] = useState(Object.assign({}, baseStyle, hiddenStyle));
@@ -122,7 +123,7 @@ function TransitionScroll({
   }, []);
 
   return (
-    <Tag ref={elementRef} style={style} className={`${styles.baseStyle} ${className}`}>
+    <Tag ref={elementRef} style={style} className={`${styles.baseStyle} ${className}`} {...props}>
       {children}
     </Tag>
   );
