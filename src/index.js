@@ -15,26 +15,6 @@ let TransitionScrollTypes = (TransitionScroll.propTypes = {
   as: PropTypes.string, // The element to be used as the wrapper
 });
 
-TransitionScroll.defaultProps = {
-  threshold: 0,
-  reAnimate: false,
-  callBackBefore: (entry) => {},
-  callBackAfter: (entry) => {},
-  baseStyle: {},
-  hiddenStyle: {
-    opacity: 0.5,
-    translate: "0 12px",
-    filter: "blur(4px)",
-  },
-  showStyle: {
-    opacity: 1,
-    translate: "0 0",
-    filter: "none",
-  },
-  className: "",
-  as: "div",
-};
-
 /**
  *
  * Use this component to wrap your content with, and it will apply the hiddenStyle
