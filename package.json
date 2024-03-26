@@ -5,7 +5,10 @@
   "homepage": "https://alianza.github.io/react-transition-scroll/",
   "author": "alianza",
   "license": "MIT",
-  "repository": "alianza/react-transition-scroll",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alianza/react-transition-scroll.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
